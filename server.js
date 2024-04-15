@@ -1,5 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+
+dotenv.config();
 
 const app = express()
 
@@ -16,10 +19,11 @@ app.use(express.urlencoded({
 // view engine
 app.set('view engine', 'ejs')
 
-const dbURI = "mongodb://localhost:27017/hodlinfo_cripto_db"
+const dbURI = process.env.MONGODB_URI;
+
 const PORT = process.env.PORT || 8888
 
-mongoose.connect(dbURI,{useNewUrlParser: true,useUnifiedTopology: true})
+mongoose.connect(dbURI)
   .then((result) => {
     console.log('DB connected.......')
     console.log(`port no : ${PORT}`)
